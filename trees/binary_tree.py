@@ -16,57 +16,12 @@ def depth(tree):
         return depth(tree.right) + 1
 
 
-def inorder(tree):  # left -> middle -> right
-    if tree is None:
-        return None
-
-    if tree.left is not None:
-        inorder(tree.left)
-
-    print(tree.val, end=' ')  # middle
-
-    if tree.right is not None:
-        inorder(tree.right)
-
-
-def preorder(tree):  # middle -> left -> right
-    if tree is None:
-        return None
-
-    print(tree.val, end=' ')  # middle
-
-    if tree.left is not None:
-        preorder(tree.left)
-
-    if tree.right is not None:
-        preorder(tree.right)
-
-
-def postorder(tree):  # left -> right -> middle
-    if tree is None:
-        return None
-
-    if tree.left is not None:
-        postorder(tree.left)
-
-    if tree.right is not None:
-        postorder(tree.right)
-
-    print(tree.val, end=' ')  # middle
-
-
-tree = Node(4)
-tree.left = Node(2)
-tree.right = Node(6)
-tree.left.left = Node(1)
-tree.left.right = Node(3)
-tree.right.left = Node(5)
+tree = Node(10)
+tree.left = Node(5)
+tree.right = Node(20)
+tree.right.left = Node(3)
 tree.right.right = Node(7)
+tree.right.left.left = Node(9)
+tree.right.left.right = Node(18)
 
-print(f'Depth of the tree is {depth(tree)}')
-print('Inorder traversal is')
-inorder(tree)
-print('\nPreorder traversal is')
-preorder(tree)
-print('\nPostorder traversal is')
-postorder(tree)
+print(f'Depth of tree is {depth(tree)}')
