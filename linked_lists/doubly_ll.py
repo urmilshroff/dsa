@@ -60,8 +60,67 @@ class DoublyLL:
     def delete_at(self):
         pass
 
-    def search(self):
-        pass
+    def length(self):
+        if self.head is None or self.tail is None:
+            return 0
+
+        else:
+            count = 0
+            current = self.head
+            while current is not None:
+                count += 1
+                current = current.next
+
+            return count
+
+    def regular_search(self, elt):
+        if self.head is None or self.tail is None:
+            print('Linked list is empty')
+
+        else:
+            is_found = False
+            count = 0
+            current = self.head
+            while current is not None:
+                count += 1
+                if current.val == elt:
+                    is_found = True
+                    break
+                else:
+                    current = current.next
+
+            if is_found:
+                print(f'{elt} found in {count} iterations using regular search')
+            else:
+                print(f'{elt} not found in the linked list')
+
+    def runner_search(self, elt):
+        if self.length() % 2 == 0:
+            is_found = False
+            count = 0
+            current1 = self.head
+            current2 = self.head
+
+            while current2 is not None:
+                count += 1
+                if current2 is not None:
+                    if current1.val == elt or current2.val == elt:
+                        is_found = True
+                        break
+                    else:
+                        current1 = current1.next
+                        current2 = current1.next
+
+                else:
+                    break
+
+            if is_found:
+                print(f'{elt} found in {count} iterations using runner search')
+            else:
+                print(f'{elt} not found in the linked list')
+
+        else:
+            print('Length is odd, cannot apply runner technique!')
 
     def reverse(self):
         if self.head is None or self.tail is None:
@@ -91,12 +150,20 @@ class DoublyLL:
 list = DoublyLL()
 
 list.display()
+list.insert_beg(3)
+list.insert_end(4)
+list.insert_beg(2)
+list.insert_end(5)
 list.insert_beg(1)
-list.insert_end(2)
 list.insert_beg(0)
-list.insert_end(3)
-list.display()
-list.delete_beg()
-list.delete_end()
+list.insert_end(6)
+list.insert_end(7)
+print(f'Length is {list.length()}')
 list.display()
 list.reverse()
+list.delete_end()
+list.regular_search(2)
+list.runner_search(2)
+list.delete_beg()
+list.regular_search(6)
+list.runner_search(6)
