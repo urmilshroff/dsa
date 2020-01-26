@@ -34,8 +34,24 @@ class DoublyLL:
             new_node.prev = self.tail
             self.tail = new_node
 
-    def insert_at(self):
-        pass
+    def insert_at(self, val, pos):
+        new_node = Node(val)
+
+        if self.head is None or self.tail is None:
+            print('Linked list is empty')
+
+        else:
+            count = 0
+            current = self.head
+            while current is not None and count != pos:
+                count += 1
+                current = current.next
+
+            previous = current.prev
+            previous.next = new_node
+            new_node.prev = previous
+            current.prev = new_node
+            new_node.next = current
 
     def delete_beg(self):
         if self.head is None or self.tail is None:
@@ -57,8 +73,22 @@ class DoublyLL:
             current.next = None
             self.tail = current
 
-    def delete_at(self):
-        pass
+    def delete_at(self, pos):
+        if self.head is None or self.tail is None:
+            print('Linked list is empty')
+
+        else:
+            count = 0
+            current = self.head
+            while current is not None and count != pos:
+                count += 1
+                current = current.next
+
+            previous = current.prev
+            next = current.next
+            previous.next = next
+            next.prev = previous
+            current = None
 
     def length(self):
         if self.head is None or self.tail is None:
@@ -150,20 +180,26 @@ class DoublyLL:
 list = DoublyLL()
 
 list.display()
-list.insert_beg(3)
-list.insert_end(4)
-list.insert_beg(2)
-list.insert_end(5)
-list.insert_beg(1)
+list.insert_beg(30)
+list.insert_end(40)
+list.insert_beg(20)
+list.insert_end(50)
+list.insert_beg(10)
 list.insert_beg(0)
-list.insert_end(6)
-list.insert_end(7)
+list.insert_end(60)
+list.insert_end(70)
 print(f'Length is {list.length()}')
 list.display()
 list.reverse()
 list.delete_end()
-list.regular_search(2)
-list.runner_search(2)
+list.regular_search(20)
+list.runner_search(20)
 list.delete_beg()
-list.regular_search(6)
-list.runner_search(6)
+list.regular_search(60)
+list.runner_search(60)
+print(f'Length is {list.length()}')
+list.insert_at(80, 3)
+list.display()  # 10 20 30 80 40 50 60
+list.insert_at(90, 1)
+list.delete_at(5)
+list.display()  # 10 90 20 30 80 50 60
