@@ -44,6 +44,39 @@ def postorder(tree):  # l-r-m
     print(tree.val, end=' ')
 
 
+def is_bst(root):
+    if root is None:
+        return True
+
+    elif is_left_lesser(root) and is_right_greater(root):
+        return True
+
+    else:
+        return False
+
+
+def is_left_lesser(root):
+    if root.left is None:
+        return True
+
+    elif root.left.val <= root.val and is_bst(root.left):
+        return True
+
+    else:
+        return False
+
+
+def is_right_greater(root):
+    if root.right is None:
+        return True
+
+    elif root.right.val > root.val and is_bst(root.right):
+        return True
+
+    else:
+        return False
+
+
 tree = Node(10)  # root node
 tree.left = Node(5)
 tree.right = Node(15)
@@ -57,3 +90,5 @@ print()
 preorder(tree)  # m-l-r
 print()
 postorder(tree)  # l-r-m
+print()
+print(f'Is binary search tree: {is_bst(tree)}')
