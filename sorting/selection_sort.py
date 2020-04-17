@@ -1,13 +1,8 @@
 def selection_sort(unsorted):
-    for i in range(len(unsorted)):
-        min_pos = i
-
+    for i in range(len(unsorted) - 1):
         for j in range(i + 1, len(unsorted)):
-            if unsorted[j] < unsorted[min_pos]:
-                min_pos = j
-
-        if unsorted[min_pos] != unsorted[i]:
-            unsorted[i], unsorted[min_pos] = unsorted[min_pos], unsorted[i]
+            if unsorted[j] < unsorted[i]:
+                unsorted[i], unsorted[j] = unsorted[j], unsorted[i]
 
     return unsorted
 
