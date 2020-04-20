@@ -5,23 +5,40 @@ class Node:
         self.right = None
 
 
-def depth(tree):
-    if tree is None:
+def traverse(node):
+    if node is not None:
+        print(node.val)
+        traverse(node.left)
+        traverse(node.right)
+
+
+def count(node):
+    if node is None:
+        return 0
+    else:
+        return count(node.left) + count(node.right) + 1
+
+
+def depth(node):
+    if node is None:
         return 0
 
-    elif depth(tree.left) >= depth(tree.right):
-        return depth(tree.left) + 1
+    elif depth(node.left) >= depth(node.right):
+        return depth(node.left) + 1
 
-    elif depth(tree.left) < depth(tree.right):
-        return depth(tree.right) + 1
+    elif depth(node.left) < depth(node.right):
+        return depth(node.right) + 1
 
 
-tree = Node(10)
-tree.left = Node(5)
-tree.right = Node(20)
-tree.right.left = Node(3)
-tree.right.right = Node(7)
-tree.right.left.left = Node(9)
-tree.right.left.right = Node(18)
+root = Node(10)
+root.left = Node(5)
+root.right = Node(20)
+root.right.left = Node(3)
+root.right.right = Node(7)
+root.right.left.left = Node(9)
+root.right.left.right = Node(18)
 
-print(f'Depth of tree is {depth(tree)}')
+print(f'Depth of tree is {depth(root)}')
+print(f'Number of nodes is {count(root)}')
+print('Tree traversed is')
+traverse(root)
