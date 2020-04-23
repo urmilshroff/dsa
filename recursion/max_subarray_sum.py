@@ -1,15 +1,20 @@
-def max_crossing_sum(arr, low, mid, high):
-    pass
+def max_subarray_sum(arr):
+    global_max = arr[0]
+
+    for i in range(len(arr) - 1):
+        local_max = arr[i]
+
+        for j in range(i + 1, len(arr)):
+            if local_max < local_max + arr[j]:
+                local_max += arr[j]
+            else:
+                break
+
+        if global_max < local_max:
+            global_max = local_max
+
+    return global_max
 
 
-def max_subarray_sum(arr, low, high):
-    if low == high:
-        return arr[1]
-
-    else:
-        mid = (low + high) // 2
-        return max(max_subarray_sum(arr, low, mid), max_subarray_sum(arr, mid + 1, high), max_crossing_sum(arr, low, mid, high))
-
-
-arr = [-4, -3, 0, 1, 2, 4, 5]
-print(f'Maximum subarray sum is {max_subarray_sum(arr, 0, len(arr)-1)}')
+arr = [-4, -3, 0, 1, 3, 4, -1, 5]
+print(f'Maximum subarray sum is {max_subarray_sum(arr)}')
