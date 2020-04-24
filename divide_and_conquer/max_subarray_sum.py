@@ -21,7 +21,7 @@ def helper(arr, left_pos, mid_pos, right_pos):
 
 def max_subarray_sum(arr, left_pos, right_pos):
     if left_pos == right_pos:
-        return arr[left_pos]
+        return arr[0]
 
     else:
         mid_pos = (left_pos + right_pos) // 2
@@ -35,5 +35,5 @@ def max_subarray_sum(arr, left_pos, right_pos):
         return maximum
 
 
-arr = [2, 3, 4, 5, 7]
+arr = [2, 3, 4, -100, 5, 7, -4]
 print(f'Maximum subarray sum is {max_subarray_sum(arr, 0, len(arr) - 1)}')
