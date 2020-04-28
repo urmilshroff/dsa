@@ -5,50 +5,55 @@ class Node:
 
 
 class Queue:
-    def __init__(self, size):
-        self.size = size
-        self.front = None
-        self.rear = None
-
-    def is_empty(self):
-        if self.front is None and self.rear is None:
-            return True
-        else:
-            return False
+    def __init__(self):
+        self.front = None  # head
+        self.rear = None  # tail
 
     def enqueue(self, val):
-        item = Node(val)
+        node = Node(val)
 
-        if self.is_empty():
-            self.front = item
-
-        self.rear = item
-        self.rear.next = item
-        print(f'{self.rear.val} enqueued!')
+        if self.rear is None:
+            self.front = node
+            self.rear = node
+        else:
+            node.next = self.rear
+            self.rear = node
 
     def dequeue(self):
-        if self.is_empty():
-            print('Error: queue empty')
+        if self.front is not None:
+            current = self.rear
+
+            while current.next is not self.front:
+                current = current.next
+
+            current.next = None
+            self.front = current
+
+        return self.front.val
+
+    def display(self):
+        if self.rear is None or self.front is None:
+            print('Queue is empty')
+
         else:
-            self.front = self.front.next
-            print(f'{self.front.val} dequeued!')
-            if self.front is None:
-                self.rear = None
+            print('[REAR]', end=' ')
+            current = self.rear
+
+            while current is not None:
+                print(current.val, end=' -> ')
+                current = current.next
+
+            print('None [FRONT]')
 
 
-size = 5
-queue = Queue(size)
+queue = Queue()
+queue.enqueue(0)
 queue.enqueue(1)
 queue.enqueue(2)
 queue.enqueue(3)
+queue.display()
 queue.dequeue()
 queue.enqueue(4)
 queue.enqueue(5)
-queue.enqueue(6)
-queue.enqueue(7)  # overflow
 queue.dequeue()
-queue.dequeue()
-queue.dequeue()
-queue.dequeue()
-queue.dequeue()
-queue.dequeue()  # underflow
+queue.display()
