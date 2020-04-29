@@ -75,7 +75,18 @@ class SinglyLL:
             print('Linked list is empty')
 
         else:
-            pass
+            self.reverse_util(self.head, None)
+
+    def reverse_util(self, curr_node, prev_node):  # head and None
+        if curr_node.next is None:
+            self.head = curr_node
+            curr_node.next = prev_node
+            return None
+
+        else:
+            next_node = curr_node.next
+            curr_node.next = prev_node
+            self.reverse_util(next_node, curr_node)
 
     def display(self):
         if self.head is None:
@@ -95,10 +106,11 @@ list = SinglyLL()
 list.display()
 list.insert_beg(1)
 list.insert_end(2)
-list.search(2)
+# list.search(2)
 list.insert_end(3)
 list.insert_end(4)
-list.delete_end()
-list.search(4)
-
+# list.delete_end()
+# list.search(4)
+list.display()
+list.reverse()
 list.display()
