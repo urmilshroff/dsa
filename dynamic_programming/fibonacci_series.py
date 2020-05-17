@@ -11,18 +11,23 @@ def iterative(n):
 
 def recursive(n):
     if n <= 1:
-        return recursive_arr[n]
+        return n
 
     else:
-        if recursive_arr[n] is None:
-            recursive_arr[n] = recursive(n - 1) + recursive(n - 2)
+        if recursive_arr[n - 1] is None:
+            recursive_arr[n - 1] = recursive(n - 1)
 
+        if recursive_arr[n - 2] is None:
+            recursive_arr[n - 2] = recursive(n - 2)
+
+        recursive_arr[n] = recursive_arr[n - 1] + recursive_arr[n - 2]
+        print(recursive_arr[n])
         return recursive_arr[n]
 
 
-n = 5
+n = 7
 iterative_arr = [None for i in range(n)]
-recursive_arr = [None for i in range(n)]
+recursive_arr = [None for i in range(n + 1)]
 
 iterative_arr[0], iterative_arr[1] = 0, 1
 recursive_arr[0], recursive_arr[1] = 0, 1
